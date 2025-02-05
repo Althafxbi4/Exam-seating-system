@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Seating Finder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #eef2f3;
+        }
+        .container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            border: 2px solid black;
+            background-color: white;
+            border-radius: 10px;
+        }
+        .seat {
+            width: 200px;
+            padding: 15px;
+            border: 2px solid black;
+            background-color: lightgray;
+            font-weight: bold;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+        }
+        .seat.occupied {
+            background-color: red;
+            color: white;
+        }
+        .controls {
+            margin: 20px;
+        }
+        .info {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: green;
+            text-align:start;
+            display: inline-block;
+        }
+        
+        h1{
+            color: green;
+            font-weight: bolder;
+            margin-block:0cqmax;
+        }
+        h2{
+            padding: 40px; 
+            margin: 0;
+            font-size: 35px;
+        }
+        .controls{
+            padding-bottom: 30px;
+            font-size: 25px;
+        }
+        button{
+            background-color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>CMS COLLEGE OF SCIENCE & COMMERCE </h1>
+    <h2>Exam Seating Finder</h2>
+    <div class="controls">
+        <label for="rollNumber">Enter Roll Number:</label>
+        <input type="text" id="rollNumber">
+        <button onclick="findSeat()">Find Seat</button>
+    </div>
+    <div class="info" id="studentInfo"></div>
+    
+    
+    <script>
+        const students = [
+            { name: "Mohammed Althaf", roll: "22BCA028", class: "A", department: "BCA", hall: "103", seat: 1 },
+            { name: "Mohammed Althaf", roll: "22bca028", class: "A", department: "BCA", hall: "103", seat: 1 },
+            { name: "Sathish Raja", roll: "22BCA043", class: "A", department: "BCA", hall: "133", seat: 6 },
+            { name: "Sathish Raja", roll: "22bca043", class: "A", department: "BCA", hall: "133", seat: 6 },
+            { name: "Sabeer Ahamed", roll: "22BCA040", class: "A", department: "BCA", hall: "107", seat: 3 },
+            { name: "Sabeer Ahamed", roll: "22bca040", class: "A", department: "BCA", hall: "107", seat: 3 },
+            { name: "Mega Varthini", roll: "22BCA026", class: "A", department: "BCA", hall: "109", seat: 4 },
+            { name: "Mega Varthini", roll: "22bca026", class: "A", department: "BCA", hall: "109", seat: 4 },
+            { name: "Shalini", roll: "22BCA045", class: "A", department: "BCA", hall: "126", seat: 5 },
+            { name: "Shalini", roll: "22bca045", class: "A", department: "BCA", hall: "126", seat: 5 },
+            { name: "Punith", roll: "22BCA039", class: "A", department: "BCA", hall: "125", seat: 8 },
+            { name: "Punith", roll: "22bca039", class: "A", department: "BCA", hall: "125", seat: 8 },
+            { name: "Athifa", roll: "229149150007", class: "A", department: "Optometry", hall: "126", seat: 2 }
+        ];
+        
+        function findSeat() {
+            const rollNumber = document.getElementById("rollNumber").value;
+            const student = students.find(s => s.roll === rollNumber);
+            const info = document.getElementById("studentInfo");
+            const container = document.getElementById("seatingContainer");
+            
+            if (student) {
+                info.innerHTML = `Student Name: ${student.name} <br> Roll No: ${student.roll} <br> Class: ${student.class} <br> Department: ${student.department} <br> Hall No: ${student.hall}<br> Seat No: ${student.seat}`;
+                container.innerHTML = `
+                    <div class="seat occupied">
+                        <div><strong>Hall:</strong> ${student.hall}</div>
+                        <div><strong>Seat:</strong> ${student.seat}</div>
+                        <div><strong>Name:</strong> ${student.name}</div>
+                        <div><strong>Roll:</strong> ${student.roll}</div>
+                        <div><strong>Class:</strong> ${student.class}</div>
+                        <div><strong>Department:</strong> ${student.department}</div>
+                    </div>
+                `;
+                container.style.display = "block";
+            } else {
+                info.innerHTML = "Roll number not found.";
+                container.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
